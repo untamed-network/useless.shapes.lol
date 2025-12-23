@@ -109,7 +109,7 @@ const fetchLeaderboard = async () => {
 
 const fetchBotInfo = async () => {
     try {
-        const response = await fetch('http://212.227.166.131:10185/api/stats');
+        const response = await fetch('https://212.227.166.131:10185/api/stats');
         const data = await response.json();
         
         const usersEl = document.getElementById('users');
