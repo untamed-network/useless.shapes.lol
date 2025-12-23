@@ -108,39 +108,39 @@ const fetchLeaderboard = async () => {
 };
 
 const fetchBotInfo = async () => {
-    try {
-        const response = await fetch('https://api.shapes.lol/botinfo');
-        const data = await response.json();
-        
-        const usersEl = document.getElementById('users');
-        const serversEl = document.getElementById('servers');
+  try {
+    const response = await fetch('https://api.shapes.lol/botinfo'); // change URL if needed
+    const data = await response.json();
 
-        // Handle different data formats from botinfo endpoint
-        const users = data.Users || data.users || data.userCount || 0;
-        const servers = data.Servers || data.servers || data.guilds || data.serverCount || 0;
+    const usersEl = document.getElementById('users');
+    const serversEl = document.getElementById('servers');
+    const uptimeEL = document.getElementById('uptime').textContent = data.uptime;
+    const StatusEL = document.getElementById('status').textContent = data.status;
 
-        if (usersEl && users !== undefined) {
-            animateCounter(usersEl, users);
-            console.log(`Serving ${users.toLocaleString()} users`);
-            // Animate stats update if the function exists
-            if (typeof animateStatsUpdate === 'function') {
-                animateStatsUpdate();
-            }
-        }
-        if (serversEl && servers !== undefined) {
-            animateCounter(serversEl, servers);
-            console.log(`Serving ${servers.toLocaleString()} servers`);
-            // Animate stats update if the function exists
-            if (typeof animateStatsUpdate === 'function') {
-                animateStatsUpdate();
-            }
-        }
-    } catch (error) {
-        console.error('Failed to fetch bot info:', error);
-        // Fallback to alternative endpoints
-        fetchStatsAlternative();
+
+    // NEW PATHS
+    const users = data.members ?? 0;
+    const servers = data.servers ?? 0;
+
+    if (usersEl) {
+      animateCounter(usersEl, users);
+      console.log(`Serving ${users.toLocaleString()} users`);
     }
+
+    if (serversEl) {
+      animateCounter(serversEl, servers);
+      console.log(`Serving ${servers.toLocaleString()} servers`);
+    }
+
+    if (typeof animateStatsUpdate === 'function') {
+      animateStatsUpdate();
+    }
+
+  } catch (error) {
+    console.error('Failed to fetch bot info:', error);
+  }
 };
+    
 
 // Alternative endpoints if botinfo doesn't work
 const fetchStatsAlternative = async () => {
