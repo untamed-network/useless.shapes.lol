@@ -90,4 +90,4 @@ document.getElementById('next-page').addEventListener('click', () => {
     }
 });
 
-FetchCommands();setInterval(FetchCommands,10000);
+FetchCommands();setInterval(FetchCommands,30000);
