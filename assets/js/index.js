@@ -109,7 +109,7 @@ const fetchLeaderboard = async () => {
 
 const fetchBotInfo = async () => {
   try {
-    const response = await fetch('https://api.shapes.lol/botinfo'); // change URL if needed
+    const response = await fetch('http://212.227.166.131:10185/api/stats'); // change URL if needed
     const data = await response.json();
 
     const usersEl = document.getElementById('users');
