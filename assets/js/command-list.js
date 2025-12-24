@@ -3,7 +3,7 @@ const command_template = document.getElementById("command-template");
 
 async function FetchCommands() {
   try {
-    const data = await fetch("https://api.shapes.lol/commands");
+    const data = await fetch("https://api.shapes.lol/useless/commands");
     const { Commands } = await data.json();
 
     // Check if 'Commands' is an object and not null
@@ -90,4 +90,4 @@ document.getElementById('next-page').addEventListener('click', () => {
     }
 });
 
-FetchCommands();setInterval(FetchCommands,10000);
+FetchCommands();setInterval(FetchCommands,30000);
