@@ -109,8 +109,20 @@ const fetchLeaderboard = async () => {
 
 const fetchBotInfo = async () => {
     try {
-        const response = await fetch('http://212.227.166.131:10185/api/stats'); // Won't work since it's running on http :(
-        const data = await response.json();
+        //const response = await fetch('https://212.227.166.131:10185/api/stats');
+        function reqListener() {
+            console.log(this.response);
+            data = this.response;
+            return data;
+        };
+        let data;
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
+        req.addEventListener("load", reqListener);
+        req.open("GET", "http://212.227.166.131:10185/api/stats");
+        const data_test = req.send();
+        console.log(data_test);
+        console.log(data_test.response);
         
         const usersEl = document.getElementById('users');
         const serversEl = document.getElementById('servers');
@@ -202,9 +214,9 @@ const fetchStatsAlternative = async () => {
 
 // Initialize data fetching
 console.log('Initializing data fetching');
-//fetchLeaderboard();
+fetchLeaderboard();
 fetchBotInfo();
 
 // intervals for updating data
-//setInterval(fetchLeaderboard, 15000);
-setInterval(fetchBotInfo, 15000);
+setInterval(fetchLeaderboard, 15000);
+setInterval(fetchBotInfo, 1000);
