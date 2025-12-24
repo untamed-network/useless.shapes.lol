@@ -219,4 +219,4 @@ fetchBotInfo();
 
 // intervals for updating data
 setInterval(fetchLeaderboard, 15000);
-setInterval(fetchBotInfo, 1000);
+setInterval(fetchBotInfo, 15000);
