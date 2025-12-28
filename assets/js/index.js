@@ -109,7 +109,7 @@ const fetchLeaderboard = async () => {
 
 const fetchBotInfo = async () => {
     try {
-        const response = await fetch('https://api.useless.shapes.lol/api/stats');
+        const response = await fetch('https://api.useless.spook.bio/api/stats');
         const data = await response.json();
         
         const usersEl = document.getElementById('users');
@@ -138,7 +138,7 @@ const fetchBotInfo = async () => {
             }
         }
         if (uptimeEl && uptime !== undefined) {
-            animateCounter(serversEl, servers);
+            animateCounter(uptimeEl, uptime);
             console.log(`Online for ${uptime.toLocaleString()}`);
             // Animate stats update if the function exists
             if (typeof animateStatsUpdate === 'function') {
