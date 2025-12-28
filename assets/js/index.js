@@ -117,9 +117,9 @@ const fetchBotInfo = async () => {
         const uptimeEl = document.getElementById('uptime');
 
         // Handle different data formats from botinfo endpoint
-        const users = data.Members || data.members || data.memberCount || 0;
-        const servers = data.Servers || data.servers || data.guilds || data.serverCount || 0;
-        const Uptime = data.Uptime || data.uptime || 0;
+        const users = data.members || data.Members || 0;
+        const servers = data.servers || data.Servers || 0;
+        const Uptime = data.uptime || data.Uptime || 0;
 
         if (usersEl && users !== undefined) {
             animateCounter(usersEl, users);
@@ -157,8 +157,8 @@ const fetchBotInfo = async () => {
 const fetchStatsAlternative = async () => {
     try {
         const [usersResponse, serversResponse] = await Promise.all([
-            fetch('https://api.shapes.lol/count/users'),
-            fetch('https://api.shapes.lol/count/servers')
+            fetch('https://api.useless.spook.bio/count/users'),
+            fetch('https://api.useless.spook.bio/count/servers')
         ]);
 
         const usersData = await usersResponse.json();
@@ -171,23 +171,23 @@ const fetchStatsAlternative = async () => {
         let usersUpdated = false;
         let serversUpdated = false;
         
-        if (usersEl && usersData.Users !== undefined) {
-            animateCounter(usersEl, usersData.Users);
-            console.log(`Serving ${usersData.Users.toLocaleString()} users`);
+        if (usersEl && usersData.members !== undefined) {
+            animateCounter(usersEl, usersData.members);
+            console.log(`Serving ${usersData.members.toLocaleString()} users`);
             usersUpdated = true;
-        } else if (usersEl && usersData.users !== undefined) {
-            animateCounter(usersEl, usersData.users);
-            console.log(`Serving ${usersData.users.toLocaleString()} users`);
+        } else if (usersEl && usersData.Members !== undefined) {
+            animateCounter(usersEl, usersData.Members);
+            console.log(`Serving ${usersData.Members.toLocaleString()} users`);
             usersUpdated = true;
         }
         
-        if (serversEl && serversData.Servers !== undefined) {
-            animateCounter(serversEl, serversData.Servers);
-            console.log(`Serving ${serversData.Servers.toLocaleString()} servers`);
-            serversUpdated = true;
-        } else if (serversEl && serversData.servers !== undefined) {
+        if (serversEl && serversData.servers !== undefined) {
             animateCounter(serversEl, serversData.servers);
             console.log(`Serving ${serversData.servers.toLocaleString()} servers`);
+            serversUpdated = true;
+        } else if (serversEl && serversData.Servers !== undefined) {
+            animateCounter(serversEl, serversData.Servers);
+            console.log(`Serving ${serversData.Servers.toLocaleString()} servers`);
             serversUpdated = true;
         }
         
