@@ -139,7 +139,7 @@ const fetchBotInfo = async () => {
         }
         if (uptimeEl && uptime !== undefined) {
             animateCounter(serversEl, servers);
-            console.log(`Online for ${uptime.toLocaleString()}`);
+            console.log(`Online for ${uptime.toLocaleString()} Minutes`);
             // Animate stats update if the function exists
             if (typeof animateStatsUpdate === 'function') {
                 animateStatsUpdate();
